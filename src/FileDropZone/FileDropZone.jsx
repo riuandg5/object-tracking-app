@@ -2,14 +2,14 @@ import { useRef } from "react";
 
 import "./FileDropZone.css";
 
-export default function FileDropZone({ setVideoFile }) {
+export default function FileDropZone({ setVideoFile, addErrorMessage }) {
     const fileInputRef = useRef();
 
     function handleFiles(files) {
         if (files.length > 1) {
-            console.log("[Error] please upload a single file!");
+            addErrorMessage("[Error] please upload a single file!");
         } else if (files[0].type !== "video/mp4") {
-            console.log("[Error] only MP4 files are supported!");
+            addErrorMessage("[Error] only MP4 files are supported!");
         } else {
             setVideoFile(files[0]);
         }

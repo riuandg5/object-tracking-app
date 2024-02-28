@@ -1,0 +1,56 @@
+#flasherror-container {
+    position: fixed;
+    bottom: -50px;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    row-gap: 20px;
+    column-gap: 1em;
+    animation: slideUp 0.5s forwards;
+    visibility: hidden;
+}
+
+.flasherror {
+    background-color: #ff6961;
+    color: white;
+    font-size: 1.2em;
+    padding: 1em 2em;
+    border-radius: 5px;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+@keyframes slideUp {
+    0% {
+        bottom: -50px;
+        visibility: hidden;
+    }
+    100% {
+        bottom: 20px;
+        visibility: visible;
+    }
+}
+
+.flasherror::after {
+    content: "";
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 0.2em;
+    border-radius: 5px;
+    animation: expandFull 3s linear;
+}
+
+@keyframes expandFull {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
