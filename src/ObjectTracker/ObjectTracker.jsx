@@ -1,5 +1,13 @@
 /* eslint-disable no-undef */
 import { useRef, useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faPlay,
+    faPause,
+    faFilm,
+    faObjectGroup,
+    faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 import "./ObjectTracker.css";
 
@@ -317,7 +325,10 @@ export default function ObjectTracker({ videoFile }) {
                     type="button"
                     onClick={handleVideoPlayToggle}
                 >
-                    {isVideoPlaying ? "Pause" : "Play"}
+                    <FontAwesomeIcon
+                        icon={isVideoPlaying ? faPause : faPlay}
+                        size="2x"
+                    />
                 </button>
                 <span id="video-time">
                     {formatTime(videoCurrentTime)} / {formatTime(videoDuration)}
@@ -333,18 +344,48 @@ export default function ObjectTracker({ videoFile }) {
             </div>
 
             <div className="tracking-controls">
-                <button type="button" onClick={() => window.location.reload()}>
+                <button
+                    type="button"
+                    style={{
+                        backgroundColor: "#74c0fc",
+                    }}
+                    onClick={() => window.location.reload()}
+                >
                     New File
+                    <FontAwesomeIcon
+                        style={{ marginLeft: "1em" }}
+                        icon={faFilm}
+                    />
                 </button>
                 {isValidMarker && (
-                    <button type="button" onClick={handleResetMark}>
+                    <button
+                        type="button"
+                        style={{
+                            backgroundColor: "#ffd43b",
+                        }}
+                        onClick={handleResetMark}
+                    >
                         Reset Mark
+                        <FontAwesomeIcon
+                            style={{ marginLeft: "1em" }}
+                            icon={faObjectGroup}
+                        />
                     </button>
                 )}
                 {isValidMarker && !isTracking && (
-                    <button type="button" onClick={startTracking}>
+                    <button
+                        type="button"
+                        style={{
+                            backgroundColor: "#63e6be",
+                        }}
+                        onClick={startTracking}
+                    >
                         Start Tracking{" "}
                         {isValidMarker && isVideoEnded && "Again"}
+                        <FontAwesomeIcon
+                            style={{ marginLeft: "1em" }}
+                            icon={faMagnifyingGlass}
+                        />
                     </button>
                 )}
             </div>

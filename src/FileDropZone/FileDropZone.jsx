@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 import "./FileDropZone.css";
 
@@ -37,10 +39,18 @@ export default function FileDropZone({ setVideoFile, addErrorMessage }) {
                     handleFiles(e.target.files);
                 }}
             />
+            <FontAwesomeIcon
+                icon={faFileArrowUp}
+                size="5x"
+                style={{ color: "#74C0FC" }}
+            />
             <p>
                 Drag and drop your video file here, or <br />
                 <button
                     type="button"
+                    style={{
+                        backgroundColor: "#74c0fc",
+                    }}
                     onClick={() => fileInputRef.current.click()}
                 >
                     click here to select
