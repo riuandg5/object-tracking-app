@@ -41,3 +41,5 @@ Develop a web-based tool that enables users to visualize a video and interact wi
 
 -   Make number of bins in the color tunable as it depends on lightning conditions.
 -   Make termination criteria tunable.
+
+https://github.com/riuandg5/object-tracking-app/assets/34133332/4be08059-fa33-434e-9f5c-a055589228ac
