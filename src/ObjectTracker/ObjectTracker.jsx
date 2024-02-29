@@ -300,95 +300,114 @@ export default function ObjectTracker({ videoFile }) {
     }
 
     return (
-        <div id="object-tracker">
-            <div className="video-container">
-                <video
-                    ref={videoRef}
-                    onTimeUpdate={handleVideoTimeUpdate}
-                    onLoadedMetadata={handleVideoLoadedMetadata}
-                    onEnded={handleVideoEnded}
-                    muted
-                >
-                    <source src={URL.createObjectURL(videoFile)} />
-                </video>
-                <canvas
-                    ref={canvasRef}
-                    onMouseDown={handleMouseDownOnCanvas}
-                    onMouseMove={handleMouseMoveOnCanvas}
-                    onMouseUp={handleMouseUpOnCanvas}
-                />
-            </div>
+        <>
+            {!isValidMarker && (
+                <h1 className="head-info">
+                    Mark the object in the video (at any time) by dragging
+                    cursor over it
+                </h1>
+            )}
+            {isValidMarker && !isTracking && (
+                <h1 className="head-info">
+                    Click on start tracking to proceed
+                </h1>
+            )}
 
-            <div className="video-controls">
-                <button
-                    id="video-play-btn"
-                    type="button"
-                    onClick={handleVideoPlayToggle}
-                >
-                    <FontAwesomeIcon
-                        icon={isVideoPlaying ? faPause : faPlay}
-                        size="2x"
-                    />
-                </button>
-                <span id="video-time">
-                    {formatTime(videoCurrentTime)} / {formatTime(videoDuration)}
-                </span>
-                <input
-                    id="video-seekbar"
-                    type="range"
-                    min="0"
-                    max={videoDuration}
-                    value={videoCurrentTime}
-                    onChange={handleVideoSeek}
-                />
-            </div>
+            {isValidMarker && isTracking && (
+                <h1 className="head-info">Tracking...</h1>
+            )}
 
-            <div className="tracking-controls">
-                <button
-                    type="button"
-                    style={{
-                        backgroundColor: "#74c0fc",
-                    }}
-                    onClick={() => window.location.reload()}
-                >
-                    New File
-                    <FontAwesomeIcon
-                        style={{ marginLeft: "1em" }}
-                        icon={faFilm}
+            <div id="object-tracker">
+                <div className="video-container">
+                    <video
+                        ref={videoRef}
+                        onTimeUpdate={handleVideoTimeUpdate}
+                        onLoadedMetadata={handleVideoLoadedMetadata}
+                        onEnded={handleVideoEnded}
+                        muted
+                    >
+                        <source src={URL.createObjectURL(videoFile)} />
+                    </video>
+                    <canvas
+                        ref={canvasRef}
+                        onMouseDown={handleMouseDownOnCanvas}
+                        onMouseMove={handleMouseMoveOnCanvas}
+                        onMouseUp={handleMouseUpOnCanvas}
                     />
-                </button>
-                {isValidMarker && (
+                </div>
+
+                <div className="video-controls">
+                    <button
+                        id="video-play-btn"
+                        type="button"
+                        onClick={handleVideoPlayToggle}
+                    >
+                        <FontAwesomeIcon
+                            icon={isVideoPlaying ? faPause : faPlay}
+                            size="2x"
+                        />
+                    </button>
+                    <span id="video-time">
+                        {formatTime(videoCurrentTime)} /{" "}
+                        {formatTime(videoDuration)}
+                    </span>
+                    <input
+                        id="video-seekbar"
+                        type="range"
+                        min="0"
+                        max={videoDuration}
+                        value={videoCurrentTime}
+                        onChange={handleVideoSeek}
+                    />
+                </div>
+
+                <div className="tracking-controls">
                     <button
                         type="button"
                         style={{
-                            backgroundColor: "#ffd43b",
+                            backgroundColor: "#74c0fc",
                         }}
-                        onClick={handleResetMark}
+                        onClick={() => window.location.reload()}
                     >
-                        Reset Mark
+                        New File
                         <FontAwesomeIcon
                             style={{ marginLeft: "1em" }}
-                            icon={faObjectGroup}
+                            icon={faFilm}
                         />
                     </button>
-                )}
-                {isValidMarker && !isTracking && (
-                    <button
-                        type="button"
-                        style={{
-                            backgroundColor: "#63e6be",
-                        }}
-                        onClick={startTracking}
-                    >
-                        Start Tracking{" "}
-                        {isValidMarker && isVideoEnded && "Again"}
-                        <FontAwesomeIcon
-                            style={{ marginLeft: "1em" }}
-                            icon={faMagnifyingGlass}
-                        />
-                    </button>
-                )}
+                    {isValidMarker && (
+                        <button
+                            type="button"
+                            style={{
+                                backgroundColor: "#ffd43b",
+                            }}
+                            onClick={handleResetMark}
+                        >
+                            Reset Mark
+                            <FontAwesomeIcon
+                                style={{ marginLeft: "1em" }}
+                                icon={faObjectGroup}
+                            />
+                        </button>
+                    )}
+                    {isValidMarker && !isTracking && (
+                        <button
+                            type="button"
+                            style={{
+                                backgroundColor: "#63e6be",
+                            }}
+                            onClick={startTracking}
+                        >
+                            Start Tracking{" "}
+                            {isValidMarker && isVideoEnded && "Again"}
+                            <FontAwesomeIcon
+                                style={{ marginLeft: "1em" }}
+                                icon={faMagnifyingGlass}
+                            />
+                        </button>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 }

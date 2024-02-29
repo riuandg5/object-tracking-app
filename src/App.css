@@ -54,3 +54,9 @@
         width: 100%;
     }
 }
+
+
+.head-info {
+    padding: 1em 2em;
+    text-align: center;
+}

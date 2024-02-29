@@ -18,44 +18,48 @@ export default function FileDropZone({ setVideoFile, addErrorMessage }) {
     }
 
     return (
-        <div
-            className="file-drop-zone"
-            onDragEnter={(e) => {
-                e.preventDefault();
-            }}
-            onDragOver={(e) => {
-                e.preventDefault();
-            }}
-            onDrop={(e) => {
-                e.preventDefault();
-                handleFiles(e.dataTransfer.files);
-            }}
-        >
-            <input
-                ref={fileInputRef}
-                type="file"
-                onChange={(e) => {
+        <>
+            <h1 className="head-info">Add a video file to proceed with</h1>
+
+            <div
+                className="file-drop-zone"
+                onDragEnter={(e) => {
                     e.preventDefault();
-                    handleFiles(e.target.files);
                 }}
-            />
-            <FontAwesomeIcon
-                icon={faFileArrowUp}
-                size="5x"
-                style={{ color: "#74C0FC" }}
-            />
-            <p>
-                Drag and drop your video file here, or <br />
-                <button
-                    type="button"
-                    style={{
-                        backgroundColor: "#74c0fc",
+                onDragOver={(e) => {
+                    e.preventDefault();
+                }}
+                onDrop={(e) => {
+                    e.preventDefault();
+                    handleFiles(e.dataTransfer.files);
+                }}
+            >
+                <input
+                    ref={fileInputRef}
+                    type="file"
+                    onChange={(e) => {
+                        e.preventDefault();
+                        handleFiles(e.target.files);
                     }}
-                    onClick={() => fileInputRef.current.click()}
-                >
-                    click here to select
-                </button>
-            </p>
-        </div>
+                />
+                <FontAwesomeIcon
+                    icon={faFileArrowUp}
+                    size="5x"
+                    style={{ color: "#74C0FC" }}
+                />
+                <p>
+                    Drag and drop your video file here, or <br />
+                    <button
+                        type="button"
+                        style={{
+                            backgroundColor: "#74c0fc",
+                        }}
+                        onClick={() => fileInputRef.current.click()}
+                    >
+                        click here to select
+                    </button>
+                </p>
+            </div>
+        </>
     );
 }
